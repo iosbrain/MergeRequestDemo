@@ -51,8 +51,14 @@ class ViewController: UIViewController {
     // display on screen.
     @IBAction func checkTempButtonTapped(_ sender: Any) {
         
-        let temperature = getTemperature()
-        temperatureLabel.text = String(temperature) + " F"
+        temperatureLabel.alpha = 0.0
+        
+        UIView.animate(withDuration: 2.0) {
+            
+            self.temperatureLabel.alpha = 1.0
+            let temperature = self.getTemperature()
+            self.temperatureLabel.text = String(temperature) + " F"
+        }
         
     }
     
