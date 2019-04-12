@@ -51,16 +51,19 @@ class ViewController: UIViewController {
     // display on screen.
     @IBAction func checkTempButtonTapped(_ sender: Any) {
         
-        temperatureLabel.alpha = 0.0
+        let temperature = getTemperature()
+        let temperatureString = String(temperature) + " F"
         
-        UIView.animate(withDuration: 2.0) {
-            
-            self.temperatureLabel.alpha = 1.0
-            let temperature = self.getTemperature()
-            self.temperatureLabel.text = String(temperature) + " F"
+        UIView.animate(withDuration: 2.0, animations: {
+            self.temperatureLabel.alpha = 0.0
+        }) { (success) in
+            UIView.animate(withDuration: 2.0, animations: {
+                self.temperatureLabel.alpha = 1.0
+                self.temperatureLabel.text = temperatureString
+            })
         }
         
-    }
+    } // end func checkTempButtonTapped
     
     // Mock up a weather/temperature service.
     func getTemperature() -> Int {
